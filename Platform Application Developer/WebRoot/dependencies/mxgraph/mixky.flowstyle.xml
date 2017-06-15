@@ -1,0 +1,127 @@
+<mxStylesheet>
+	<add as="node">
+		<add as="shape" value="label"/>
+		<add as="perimeter" value="rectanglePerimeter"/>
+		<add as="fontSize" value="12"/>
+		<add as="align" value="center"/>
+		<add as="verticalAlign" value="middle"/>
+		<add as="strokeColor" value="#666666"/>
+		<add as="fillColor" value="#C3D9FF"/>
+		<add as="gradientColor" value="#FFFFFF"/>
+	</add>
+	<add as="nodeStart">
+		<add as="shape" value="ellipse"/>
+		<add as="fontSize" value="12"/>
+		<add as="align" value="center"/>
+		<add as="verticalAlign" value="middle"/>
+		<add as="strokeColor" value="#666666"/>
+		<add as="fillColor" value="#90EE90"/>
+		<add as="gradientColor" value="#FFFFFF"/>
+	</add>
+	<add as="nodeEnd" extend="nodeStart">
+		<add as="strokeColor" value="#666666"/>
+		<add as="fillColor" value="#FFFFFF"/>
+		<add as="gradientColor" value="#808080"/>
+	</add>
+	<add as="nodeSubFlow">
+		<add as="shape" value="rhombus"/>
+		<add as="fontColor" value="blue"/>
+		<add as="strokeColor" value="red"/>
+		<add as="fontSize" value="12"/>
+		<add as="align" value="center"/>
+		<add as="verticalAlign" value="middle"/>
+		<add as="fillColor" value="#FFF68F"/>
+		<add as="gradientColor" value="#FFFFFF"/>
+	</add>
+	<add as="nodeProcess" extend="node">
+		<add as="fontSize" value="12"/>
+		<add as="align" value="center"/>
+		<add as="verticalAlign" value="middle"/>
+		<add as="fillColor" value="#C3D9FF"/>
+		<add as="verticalAlign" value="middle"/>
+		<add as="strokeColor" value="blue"/>
+	</add>
+	<add as="nodeFork">
+		<add as="shape" value="ellipse"/>
+		<add as="perimeter" value="ellipsePerimeter"/>
+		<add as="fontSize" value="12"/>
+		<add as="align" value="center"/>
+		<add as="verticalAlign" value="middle"/>
+		<add as="fillColor" value="#EEE685"/>
+		<add as="gradientColor" value="#FFFFFF"/>
+		<add as="strokeColor" value="#8FBC8F"/>
+	</add>
+	<add as="nodeJoin">
+		<add as="shape" value="ellipse"/>
+		<add as="perimeter" value="ellipsePerimeter"/>
+		<add as="fontSize" value="12"/>
+		<add as="align" value="center"/>
+		<add as="verticalAlign" value="middle"/>
+		<add as="strokeColor" value="#4F94CD"/>
+		<add as="fillColor" value="#EEAEEE"/>
+		<add as="gradientColor" value="#FFFFFF"/>
+	</add>
+	<add as="nodeScript">
+		<add as="shape" value="rhombus"/>
+		<add as="fontSize" value="12"/>
+		<add as="align" value="center"/>
+		<add as="verticalAlign" value="middle"/>
+		<add as="strokeColor" value="#4F94CD"/>
+		<add as="fillColor" value="#90EE90"/>
+		<add as="gradientColor" value="#FFFFFF"/>
+	</add>
+	<add as="nodeDone" extend="node">
+		<add as="strokeColor" value="#666666"/>
+		<add as="fillColor" value="#C5C1AA"/>
+		<add as="gradientColor" value="#C5C1AA"/>
+	</add>
+	<add as="nodeUndo" extend="node">
+		<add as="strokeColor" value="#666666"/>
+		<add as="gradientColor" value="#FFFFFF"/>
+	</add>
+	<add as="nodeDoing" extend="node">
+		<add as="strokeColor" value="#666666"/>
+		<add as="fillColor" value="#98FB98"/>
+		<add as="gradientColor" value="#98FB98"/>
+	</add>
+	<add as="nodeSubFlowDone" extend="nodeSubFlow">
+		<add as="strokeColor" value="#666666"/>
+		<add as="fillColor" value="#C5C1AA"/>
+		<add as="gradientColor" value="#C5C1AA"/>
+	</add>
+	<add as="nodeSubFlowDoneUndo" extend="nodeSubFlow">
+		<add as="strokeColor" value="#666666"/>
+		<add as="gradientColor" value="#FFFFFF"/>
+	</add>
+	<add as="nodeSubFlowDoneDoing" extend="nodeSubFlow">
+		<add as="strokeColor" value="#666666"/>
+		<add as="fillColor" value="#90EE90"/>
+		<add as="gradientColor" value="#90EE90"/>
+	</add>
+	<add as="nodeComputePassed" extend="nodeProcess">
+		<add as="strokeColor" value="#666666"/>
+		<add as="fillColor" value="#C5C1AA"/>
+		<add as="gradientColor" value="#C5C1AA"/>
+	</add>
+	<add as="nodeComputeUnpassed" extend="nodeProcess">
+		<add as="strokeColor" value="#666666"/>
+		<add as="gradientColor" value="#FFFFFF"/>
+	</add>
+	<add as="route">
+		<add as="shape" value="connector"/>
+		<add as="labelBackgroundColor" value="#FFFFFF"/>
+		<add as="endArrow" value="classic"/>
+		<add as="fontSize" value="11"/>
+		<add as="align" value="center"/>
+		<add as="verticalAlign" value="middle"/>
+		<add as="strokeColor" value="#000000"/>
+		<add as="rounded" value="1"/>
+		<add as="edgeStyle" value="elbowEdgeStyle"/>
+	</add>
+	<add as="routeUp" extend="route">
+		<add as="edgeStyle" value="elbowEdgeStyle"/>
+	</add>
+	<add as="routeDown" extend="routeUp">
+		<add as="elbow" value="vertical"/>
+	</add>
+</mxStylesheet>

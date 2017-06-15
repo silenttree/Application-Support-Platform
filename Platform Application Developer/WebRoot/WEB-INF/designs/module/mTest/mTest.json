@@ -1,0 +1,26 @@
+{
+	"id":"mTest",
+	"f_caption":"mTest",
+	"f_class":"module",
+	"f_key":"mTest",
+	"f_menus":
+	[
+		{
+			"id":"mTest.menuTest",
+			"f_action_type":"None",
+			"f_caption":"menuTest",
+			"f_class":"menu",
+			"f_group_type":"None",
+			"f_i_parent":
+			{
+				"class":"module",
+				"data":"mTest"
+			},
+			"f_key":"menuTest",
+			"f_name":"menuTest",
+			"f_order":1
+		}
+	],
+	"f_name":"mTest",
+	"f_type":"default"
+}

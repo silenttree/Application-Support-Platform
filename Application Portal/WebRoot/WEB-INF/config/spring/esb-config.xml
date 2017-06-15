@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<!-- definition of connection factory -->
+	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL">
+			<value>${esb.mq.brokerurl}</value>
+		</property>
+	</bean>
+
+	<!-- definition of message converter -->
+	<bean id="MessageConverter" class="com.asc.commons.esb.mq.EsbMessageConverter" />
+
+	<!-- definition of message receiver -->
+	<bean id="MessageReceiver" class="com.asc.commons.esb.MessageReceiver">
+		<property name="handlers">
+			<map>
+				<entry key="AppMessage">
+					<ref bean="DefaultMessageHandler"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="DefaultMessageHandler" class="com.asc.esb.DefaultMessageHandler"/>
+	<bean id="MessageListener" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+		<constructor-arg>
+			<ref bean="MessageReceiver" />
+		</constructor-arg>
+		<property name="defaultListenerMethod" value="onArrival" />
+		<property name="messageConverter" ref="MessageConverter" />
+	</bean>
+
+	<!-- definition of arrival queue/topic -->
+	<bean id="PORTAL-QUEUE" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="ESB-PORTAL-QUEUE" />
+	</bean>
+	<bean id="BROADCAST-TOPIC" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg index="0" value="ESB-BROADCAST-TOPIC" />
+	</bean>
+
+	<!-- definition of message-listener container -->
+	<bean id="EsbMsglistenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="PORTAL-QUEUE" />
+		<property name="messageListener" ref="MessageListener" />
+	</bean>
+	<bean id="BroadcastMsglistenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="BROADCAST-TOPIC" />
+		<property name="messageListener" ref="MessageListener" />
+	</bean>
+
+	<!-- definition of broadcast messenger -->
+	<bean id="BroadcastJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory">
+			<ref bean="connectionFactory" />
+		</property>
+		<property name="messageConverter" ref="MessageConverter" />
+	</bean>
+	<bean id="BroadcastMessanger" class="com.asc.commons.esb.MessageSender">
+		<property name="queueName">
+			<value>BROADCAST-TOPIC</value>
+		</property>
+    	<property name="jmsTemplate">
+    		<ref bean="BroadcastJmsTemplate"/>
+    	</property>
+	</bean>
+
+</beans>

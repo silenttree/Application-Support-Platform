@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    <bean id="configBean" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="fileEncoding">
+			<value>UTF-8</value>
+		</property>
+		<property name="location">
+			<value>/WEB-INF/param.properties</value>
+		</property>
+	</bean>
+	<!-- 应用参数配置 -->
+	<bean id="AppConfiguration" class="com.asc.framework.app.AppConfiguration">
+		<property name="appId">
+			<value>${app.id}</value>
+		</property>
+		<property name="appName">
+			<value>${app.name}</value>
+		</property>
+		<property name="appTitle">
+			<value>${app.title}</value>
+		</property>
+		<property name="appLicense">
+			<value>${app.license}</value>
+		</property>
+		<property name="appMode">
+			<value>${app.mode}</value>
+		</property>
+	</bean>
+
+	<bean id="DefaultDataSource" class="com.mixky.dbac.datasource.DataSource">
+		<property name="name">
+			<value>defaultDsn</value>
+		</property>
+		<property name="dbTypeStr">
+			<value>${db.type}</value>
+		</property>
+		<property name="url">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc.user}</value>
+		</property>
+		<property name="userpass">
+			<value>${jdbc.passwd}</value>
+		</property>
+		<property name="maxConns">
+			<value>${db.pool.maxconns}</value>
+		</property>
+		<property name="minConns">
+			<value>${db.pool.minconns}</value>
+		</property>
+		<property name="initConns">
+			<value>${db.pool.minconns}</value>
+		</property>
+		<property name="default">
+			<value>true</value>
+		</property>
+	</bean>
+	
+	<bean id="SessionFactory" class="com.mixky.dbac.SessionFactory">
+		<property name="dataSources">
+			<list>
+				<ref bean="DefaultDataSource"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!--definition of context event handler-->
+	<bean id="ApplicationContextEventHandler" class="com.asc.framework.system.loader.ApplicationContextEventHandler">
+		<property name="listeners">
+			<list>
+				<ref bean="DesignObjectLoader"/>
+				<ref bean="DeveloperAppContextLoader"/>
+			</list>
+		</property>
+	</bean>
+	<bean id="DesignObjectLoader" class="com.asc.framework.system.loader.DesignObjectLoader"/>
+	<bean id="DeveloperAppContextLoader" class="com.asc.framework.developer.DeveloperAppContextLoader"/>
+	<!--end definition of context event handler-->
+	
+	<!--definition of designobject factory-->
+	<bean id="EntityConfig" class="com.asc.commons.design.Config">
+		<property name="base_package">
+			<value>com.asc.commons.engine.design.entity,com.asc.workflow.core.template,com.asc.esb.serviceflow.entity,com.asc.framework.importfile.design.entity</value>
+		</property>
+	</bean>
+	<bean id="DesignObjectFactory" class="com.asc.commons.design.DesignObjectFactory">
+		<property name="config">
+			<ref bean="EntityConfig"/>
+		</property>
+		<property name="objCache">
+			<ref bean="DesignObjectCacheImp"/>
+		</property>
+		<property name="jsonSerializer">
+			<ref bean="JsonObjectSerializeFileImp"/>
+		</property>
+	</bean>
+	<bean id="DesignObjectCacheImp" class="com.asc.commons.design.cache.DesignObjectCacheImp"/>
+	<bean id="JsonObjectSerializeFileImp" class="com.asc.commons.design.serialize.imp.JsonObjectSerializeFileImp"/>
+	<!--end definition of designobject factory-->
+	
+	<!--deinition of designobject service(for remote access)-->
+	<bean id="DesignObjectService" class="com.asc.framework.designobject.service.DesignObjectService">
+		<property name="objAccess">
+			<ref bean="WsDesignObjectAccessor"/>
+		</property>
+	</bean>
+	<bean id="WsDesignObjectAccessor" class="com.asc.framework.designobject.accessor.imp.WsDesignObjectAccessor">
+		<property name="namespace">
+			<value>http://ws.service.framework.asc.com</value>
+		</property>
+	</bean>
+	<!--end definition of designobject service-->
+
+	<!--definition of context variables parser-->
+	<bean id="ContextVariablesParser" class="com.asc.commons.context.ContextVariablesParser"/>
+	<!--end definition of context variables parser-->
+	
+	<!-- beans of user certification(intergrate with cas) in webapp -->
+	<bean id="AscUserCertification" class="com.asc.commons.certification.AscUserCertification">
+		<property name="certification">
+			<ref bean="CasUserCertificationImp"/>
+		</property>
+	</bean>
+	<bean id="CasUserCertificationImp" class="com.asc.framework.certfication.cas.imp.CasUserCertificationImp">
+		<property name="casLoginUrl">
+			<value>${cas.loginurl}</value>
+		</property>
+		<property name="casServiceUrl">
+			<value>${cas.serviceurl}</value>
+		</property>
+	</bean>
+	<bean id="CasWebAppIntergration" class="com.asc.framework.certfication.cas.CasWebAppIntergration">
+		<property name="casModeImp">
+			<ref bean="CasUserCertificationImp"/>
+		</property>
+	</bean>
+	<bean id="UserStatusRegistry" class="com.asc.framework.certfication.registry.UserStatusRegistry">
+		<property name="ticketStore">
+			<ref bean="TicketStoreCookieImp"/>
+		</property>
+	</bean>
+	<bean id="TicketStoreCookieImp" class="com.asc.framework.certfication.registry.imp.TicketStoreCookieImp"/>
+	<!-- end difinition of user certification -->
+	
+</beans>

@@ -1,0 +1,41 @@
+.asc-desktop-header-body {
+	background-color: transparent;
+}
+
+.asc-btn-shortcut:not (.x-over ){
+	background-color: transparent;
+	background-image: none;
+}
+
+.asc-desktop-title-body {
+	padding-top: 5px;
+	padding-left: 10px;
+	font-size: 20px;
+	font-weight: bold;
+	font-family: 微软雅黑;
+	letter-spacing: 3px;
+	background-color: transparent;
+}
+
+.asc-desktop-footer-body {
+	text-align: center;
+	color: #ddd;
+	text-shadow: 0 0 0, 1px 1px 0 #333, 1px 1px 0 #444;
+	background-color: transparent;
+}
+
+.x-form-item-label {
+	font-size : 15px;
+	font-weight : bold;
+	font-family: 微软雅黑;
+}
+
+.x-fieldset-header-text {
+	font-size : 16px;
+	font-family: 微软雅黑;
+}
+.x-form-display-field {
+	color : darkblue;
+	font-size : 16px;
+	font-family: 微软雅黑;
+}

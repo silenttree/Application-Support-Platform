@@ -1,0 +1,31 @@
+.x-btn-hasBadge {    
+overflow: visible;
+}
+.x-btn-badgeCls {
+    font-size: 10px;
+    position: absolute;
+    top: -10px;
+    right: 2px;
+    display: inline-block;
+    width: auto;
+    font-weight: bold;
+    color: white;
+    text-shadow: rgba(0, 0, 0, 0.5) 0 -0.08em 0;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    padding: 0px;
+    padding: 1px 2px;
+    background-image: none;
+    background-color: #C00;
+   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ff1a1a), color-stop(3%, #e60000), color-stop(100%, #b30000));
+    background-image: -webkit-linear-gradient(top, #ff1a1a,#e60000 3%,#b30000);
+    background-image: linear-gradient(top, #ff1a1a,#e60000 3%,#b30000);    -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 0.1em 0.1em;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 0.1em 0.1em;
+    z-index: 12;
+}
+.has-badge {
+    overflow: visible !important;
+}
+.hide-badge {
+    display: none !important;
+} 

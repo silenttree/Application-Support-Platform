@@ -1,0 +1,6 @@
+var key;
+function RSAinit(){ 
+	setMaxDigits(130); 
+	 key = new RSAKeyPair("10001","","8588ca3c570fd03f34dad65856c26b4b4b54b858d91481e93d5d5f9d2a27e5bc8d025bed20a1c43ba4b0762e89e713dbf19db3ed9ce1059ead2323506ecf6705b62dd6368bc1b960d1d95a35879f422d47a1e2d1ea4c016051e705e68f8f0f3c95160bb4e1d5de7dd1163f2dc9f3baec766372f32cd3c99fc2d5e47e42d4c855"); 		
+   };
+ 

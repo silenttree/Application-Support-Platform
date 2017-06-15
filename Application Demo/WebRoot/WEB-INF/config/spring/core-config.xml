@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<!-- 应用参数配置 -->
+	<bean id="AppConfiguration" class="com.asc.framework.app.AppConfiguration">
+		<property name="appId">
+			<value>${app.id}</value>
+		</property>
+		<property name="appName">
+			<value>${app.name}</value>
+		</property>
+		<property name="appTitle">
+			<value>${app.title}</value>
+		</property>
+		<property name="appLicense">
+			<value>${app.license}</value>
+		</property>
+		<property name="appMode">
+			<value>${app.mode}</value>
+		</property>
+	</bean>
+
+	<bean id="DefaultDataSource" class="com.mixky.dbac.datasource.DataSource">
+		<property name="name">
+			<value>defectsDsn</value>
+		</property>
+		<property name="dbTypeStr">
+			<value>${db.type}</value>
+		</property>
+		<property name="url">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc.user}</value>
+		</property>
+		<property name="userpass">
+			<value>${jdbc.passwd}</value>
+		</property>
+		<property name="maxConns">
+			<value>${db.pool.maxconns}</value>
+		</property>
+		<property name="minConns">
+			<value>${db.pool.minconns}</value>
+		</property>
+		<property name="initConns">
+			<value>${db.pool.minconns}</value>
+		</property>
+		<property name="idGenerator">
+			<value>${db.idgenerator}</value>
+		</property>
+		<property name="default">
+			<value>true</value>
+		</property>
+		<!--
+ 		<property name="listener">
+ 			<ref bean="DbAccessOperationListener"/>
+ 		</property>
+ 		-->
+	</bean>
+
+
+	<bean id="SessionFactory" class="com.mixky.dbac.SessionFactory">
+		<property name="dataSources">
+			<list>
+				<ref bean="DefaultDataSource"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- definition of application status contoller -->
+	<bean id="ApplicationController" class="com.asc.framework.app.ApplicationController">
+		<property name="autoStart">
+			<value>true</value>
+		</property>
+		<property name="listeners">
+			<map>
+				<entry key="designobjectfactory">
+					<ref bean="DesignObjectFactoryStatusListener"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="DesignObjectFactoryStatusListener" class="com.asc.framework.app.listeners.DesignObjectFactoryStatusListener"/>
+	<!-- end definition of applocation status controller -->
+	
+	<!--definition of designobject factory-->
+	<bean id="EntityConfig" class="com.asc.commons.design.Config">
+		<property name="base_package">
+			<value>com.asc.commons.engine.design.entity,com.asc.workflow.core.template,com.asc.esb.serviceflow.entity,com.asc.framework.importfile.design.entity</value>
+		</property>
+	</bean>
+	<bean id="DesignObjectFactory" class="com.asc.commons.design.DesignObjectFactory">
+		<property name="config">
+			<ref bean="EntityConfig"/>
+		</property>
+		<property name="objCache">
+			<ref bean="DesignObjectCacheImp"/>
+		</property>
+		<property name="jsonSerializer">
+			<ref bean="JsonObjectSerializeFileImp"/>
+		</property>
+	</bean>
+	<bean id="DesignObjectCacheImp" class="com.asc.commons.design.cache.DesignObjectCacheImp"/>
+	<bean id="JsonObjectSerializeFileImp" class="com.asc.commons.design.serialize.imp.JsonObjectSerializeFileImp"/>
+	<!--end definition of designobject factory-->
+
+	<!-- beans of user certification(intergrate with cas) in webapp -->
+	<bean id="AscUserCertification" class="com.asc.commons.certification.AscUserCertification">
+		<property name="certification">
+			<ref bean="CasUserCertificationImp"/>
+		</property>
+	</bean>
+	<bean id="CasUserCertificationImp" class="com.asc.framework.certfication.cas.imp.CasUserCertificationImp">
+		<property name="casLoginUrl">
+			<value>${cas.loginurl}</value>
+		</property>
+		<property name="casServiceUrl">
+			<value>${cas.serviceurl}</value>
+		</property>
+	</bean>
+	<bean id="CasWebAppIntergration" class="com.asc.framework.certfication.cas.CasWebAppIntergration">
+		<property name="casModeImp">
+			<ref bean="CasUserCertificationImp"/>
+		</property>
+	</bean>
+	<bean id="UserStatusRegistry" class="com.asc.framework.certfication.registry.UserStatusRegistry">
+		<property name="ticketStore">
+			<ref bean="TicketStoreCookieImp"/>
+		</property>
+	</bean>
+	<bean id="TicketStoreCookieImp" class="com.asc.framework.certfication.registry.imp.TicketStoreCookieImp"/>
+	<!-- end difinition of user certification -->
+	
+	<!--definition of context event handler-->
+	<bean id="ApplicationContextEventHandler" class="com.asc.framework.system.loader.ApplicationContextEventHandler">
+		<property name="listeners">
+			<list>
+				<ref bean="ApplicationControlLoader"/>
+			</list>
+		</property>
+	</bean>
+	<bean id="ApplicationControlLoader" class="com.asc.framework.system.loader.ApplicationControlLoader"/>
+	<!--end definition of context event handler-->
+	
+	<!--definition of context variables parser-->
+	<bean id="ContextVariablesParser" class="com.asc.commons.context.ContextVariablesParser">
+		<property name="parsers">
+			<map>
+				<entry key="app-parser">
+					<ref bean="UserVariablesParser"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="UserVariablesParser" class="com.asc.commons.context.UserVariablesParser"/>
+	<!--end definition of context variables parser-->
+	
+	<!-- definition of workflow implements -->
+	<bean id="wf-eventfactory" class="com.asc.workflow.event.EventFactory">
+		<property name="dataSyncs">
+			<map>
+				<entry key="default">
+					<ref bean="AscDocumentDataInstSyncImp"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="AscDocumentDataInstSyncImp" class="com.asc.commons.engine.workflow.imp.AscDocumentDataInstSyncImp"/>
+	<bean id="wf-messengar" class="com.asc.workflow.message.WfMessengar">
+		<property name="msgHandler">
+			<ref bean="MessageHandleDbacImp"/>
+		</property>
+	</bean>
+	<bean id="MessageHandleDbacImp" class="com.asc.commons.engine.workflow.imp.MessageHandleDbacImp"/>
+	<!-- end definition of workflow implements -->
+	
+	<bean id="AbsWsAccessor" abstract="true">
+		<property name="namespace">
+			<value>http://service.webservice.bs.asc.com</value>
+		</property>
+		<property name="wsDomain">
+			<value>${bs.domain}</value>
+		</property>
+	</bean>
+	
+	<bean id="AppEntWsAccessor" parent="AbsWsAccessor" class="com.asc.framework.service.client.AppEntWsAccessor">
+		<property name="wsName">
+			<value>AppEntWebService</value>
+		</property>
+	</bean>
+	<bean id="ApplicationWsAccessor" parent="AbsWsAccessor" class="com.asc.framework.service.client.ApplicationWsAccessor">
+		<property name="wsName">
+			<value>ApplicationWebService</value>
+		</property>
+	</bean>
+	<bean id="DictionaryWsAccessor" parent="AbsWsAccessor" class="com.asc.framework.service.client.DictionaryWsAccessor">
+		<property name="wsName">
+			<value>DictionaryWebService</value>
+		</property>
+	</bean>
+	<bean id="OrganizationWsAccessor" parent="AbsWsAccessor" class="com.asc.framework.service.client.OrganizationWsAccessor">
+		<property name="wsName">
+			<value>OrganizationWebService</value>
+		</property>
+	</bean>
+	<bean id="ModuleRoleMappingWsAccessor" parent="AbsWsAccessor" class="com.asc.framework.service.client.ModuleRoleMappingWsAccessor">
+		<property name="wsName">
+			<value>ModuleRoleMappingWebService</value>
+		</property>
+	</bean>
+	<bean id="WorkFlowRoleMappingWsAccessor" parent="AbsWsAccessor" class="com.asc.framework.service.client.WorkFlowRoleMappingWsAccessor">
+		<property name="wsName">
+			<value>WorkFlowRoleMappingWebService</value>
+		</property>
+	</bean>
+	
+</beans>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <!-- 引用ehCache的配置 -->
+    <bean id="defaultCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+      <property name="configLocation">
+        <value>/WEB-INF/config/cache/ehcache.xml</value>
+      </property>
+    </bean>
+
+    <!-- 定义ehCache的工厂，并设置所使用的Cache name -->
+    <bean id="ehCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+      <property name="cacheManager">
+        <ref local="defaultCacheManager"/>
+      </property>
+      <property name="cacheName">
+          <value>DEFAULT_CACHE</value>
+      </property>
+    </bean>
+	
+	 <!-- find/get cache拦截器 -->
+    <bean id="methodCacheInterceptor" class="com.asc.framework.cache.aop.MethodCacheInterceptor">
+      <property name="cache">
+        <ref local="ehCache" />
+      </property>
+    </bean>
+	
+    <bean id="readMethodCachePointCut" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+      <property name="advice">
+        <ref local="methodCacheInterceptor"/>
+      </property>
+      <property name="patterns">
+        <list>
+            <value>.*find.*</value>
+            <value>.*get.*</value>
+        </list>
+      </property>
+    </bean>
+	
+	<bean id="ApplicationEntranceServiceBean" class="com.asc.commons.applicationentrance.service.ApplicationEntranceService">
+		<property name="reader">
+			<ref bean="AppEntWsAccessor"/>
+		</property>
+	</bean>
+	<bean id="ApplicationServiceBean" class="com.asc.commons.application.service.ApplicationService">
+		<property name="reader">
+			<ref bean="ApplicationWsAccessor"/>
+		</property>
+	</bean>
+    <bean id="OrganizationServiceBean" class="com.asc.commons.organization.service.OrganizationService">
+		<property name="orgReader">
+			<ref bean="OrganizationWsAccessor"/>
+		</property>
+	</bean>
+<!-- 	<bean id="OrganizationService" class="com.asc.commons.organization.service.OrganizationService"> -->
+<!-- 		<property name="orgReader"> -->
+<!-- 			<ref bean="OrganizationWsAccessor"/> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	<bean id="DictionaryServiceBean" class="com.asc.commons.dictionary.service.DictionaryService">
+		<property name="dicReader">
+			<ref bean="DictionaryWsAccessor"/>
+		</property>
+	</bean>
+	
+	<bean id="ModuleRoleMappingServiceBean" class="com.asc.commons.modulerolemapping.service.ModuleRoleMappingService">
+		<property name="reader">
+			<ref bean="ModuleRoleMappingWsAccessor"/>
+		</property>
+	</bean>
+	<bean id="WorkFlowRoleMappingServiceBean" class="com.asc.commons.wfrolemapping.service.WorkFlowRoleMappingService">
+		<property name="reader">
+			<ref bean="WorkFlowRoleMappingWsAccessor"/>
+		</property>
+	</bean>	
+	
+	<!--应用注册数据查询服务动态代理配置-->
+	<bean id="ApplicationService" class="org.springframework.aop.framework.ProxyFactoryBean">
+      <property name="target">
+          <ref local="ApplicationServiceBean"/>
+      </property>
+      <property name="interceptorNames">
+        <list>
+          <value>readMethodCachePointCut</value>
+        </list>
+      </property>
+  	</bean>
+	
+	<!--组织机构数据查询服务动态代理配置-->
+ 	<bean id="OrganizationService" class="org.springframework.aop.framework.ProxyFactoryBean">
+      <property name="target">
+          <ref local="OrganizationServiceBean"/>
+      </property>
+      <property name="interceptorNames">
+        <list>
+          <value>readMethodCachePointCut</value>
+        </list>
+      </property>
+  	</bean> 
+	
+	<!--字典数据查询服务动态代理配置-->
+	<bean id="DictionaryService" class="org.springframework.aop.framework.ProxyFactoryBean">
+      <property name="target">
+          <ref local="DictionaryServiceBean"/>
+      </property>
+      <property name="interceptorNames">
+        <list>
+          <value>readMethodCachePointCut</value>
+        </list>
+      </property>
+  	</bean>
+	
+	<!--模块角色映射查询服务动态代理配置-->
+	<bean id="ModuleRoleMappingService" class="org.springframework.aop.framework.ProxyFactoryBean">
+      <property name="target">
+          <ref local="ModuleRoleMappingServiceBean"/>
+      </property>
+      <property name="interceptorNames">
+        <list>
+          <value>readMethodCachePointCut</value>
+        </list>
+      </property>
+  	</bean>
+	
+	<!--流程角色映射查询服务动态代理配置-->
+	<bean id="WorkFlowRoleMappingService" class="org.springframework.aop.framework.ProxyFactoryBean">
+      <property name="target">
+          <ref local="WorkFlowRoleMappingServiceBean"/>
+      </property>
+      <property name="interceptorNames">
+        <list>
+          <value>readMethodCachePointCut</value>
+        </list>
+      </property>
+  	</bean>
+	
+</beans>

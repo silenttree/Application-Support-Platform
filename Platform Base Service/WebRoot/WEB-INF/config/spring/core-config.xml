@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<!-- 应用参数配置 -->
+	<bean id="AppConfiguration" class="com.asc.framework.app.AppConfiguration">
+		<property name="appId">
+			<value>${app.id}</value>
+		</property>
+		<property name="appName">
+			<value>${app.name}</value>
+		</property>
+		<property name="appTitle">
+			<value>${app.title}</value>
+		</property>
+		<property name="appLicense">
+			<value>${app.license}</value>
+		</property>
+		<property name="appMode">
+			<value>${app.mode}</value>
+		</property>
+	</bean>
+	
+	<bean id="PlatformDataSource" class="com.mixky.dbac.datasource.DataSource">
+		<property name="name">
+			<value>platformDsn</value>
+		</property>
+		<property name="dbTypeStr">
+			<value>${db.type}</value>
+		</property>
+		<property name="url">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc.user}</value>
+		</property>
+		<property name="userpass">
+			<value>${jdbc.passwd}</value>
+		</property>
+		<property name="maxConns">
+			<value>${db.pool.maxconns}</value>
+		</property>
+		<property name="minConns">
+			<value>${db.pool.minconns}</value>
+		</property>
+		<property name="initConns">
+			<value>${db.pool.minconns}</value>
+		</property>
+		<property name="default">
+			<value>true</value>
+		</property>
+	</bean>
+	<bean id="SessionFactory" class="com.mixky.dbac.SessionFactory">
+		<property name="dataSources">
+			<list>
+				<ref bean="PlatformDataSource"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!--definition of context event handler-->
+	<bean id="ApplicationContextEventHandler" class="com.asc.framework.system.loader.ApplicationContextEventHandler">
+		<property name="listeners">
+			<list>
+				<ref bean="LogFactoryLoader"/>
+			</list>
+		</property>
+	</bean>
+	<bean id="LogFactoryLoader" class="com.asc.bs.system.loader.LogFactoryLoader"/>
+	<!--end definition of context event handler-->
+	
+	<!--definition of context variables parser-->
+	<bean id="ContextVariablesParser" class="com.asc.commons.context.ContextVariablesParser"/>
+	<!--end definition of context variables parser-->
+
+	<bean id="LogConfigReaderImpl" class="com.asc.bs.log.access.imp.LogConfigReaderImpl"/>
+	
+	<bean id="OrganizationReaderImp" class="com.asc.bs.organization.access.imp.OrganizationReaderImp"/>
+	<bean id="OrganizationService" class="com.asc.commons.organization.service.OrganizationService">
+		<property name="orgReader">
+			<ref bean="OrganizationReaderImp"/>
+		</property>
+	</bean>
+	
+	<!-- 文档操作的service -->
+	<bean id="DocReaderImp" class="com.asc.bs.doc.access.imp.DocReaderImp" />
+	<bean id="DocWriterImp" class="com.asc.bs.doc.access.imp.DocWriterImp" />
+	<bean id="DocManager" class="com.asc.bs.doc.service.DocManager">
+		<property name="reader">
+			<ref bean="DocReaderImp"/>
+		</property>
+		<property name="writer">
+			<ref bean="DocWriterImp"/>
+		</property>
+	</bean>
+	<!-- 文档操作的service 结束 -->
+	
+</beans>

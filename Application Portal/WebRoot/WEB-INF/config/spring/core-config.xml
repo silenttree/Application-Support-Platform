@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<!-- 应用参数配置 -->
+	<bean id="AppConfiguration" class="com.asc.framework.app.AppConfiguration">
+		<property name="appId">
+			<value>${app.id}</value>
+		</property>
+		<property name="appName">
+			<value>${app.name}</value>
+		</property>
+		<property name="appTitle">
+			<value>${app.title}</value>
+		</property>
+		<property name="appLicense">
+			<value>${app.license}</value>
+		</property>
+		<property name="appMode">
+			<value type="com.asc.framework.app.ApplicationRunMode">${app.mode}</value>
+		</property>
+	</bean>
+
+	<bean id="DefaultDataSource" class="com.mixky.dbac.datasource.DataSource">
+		<property name="name">
+			<value>defaultDsn</value>
+		</property>
+		<property name="dbTypeStr">
+			<value>${db.type}</value>
+		</property>
+		<property name="url">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc.user}</value>
+		</property>
+		<property name="userpass">
+			<value>${jdbc.passwd}</value>
+		</property>
+		<property name="connectionProvider">
+			<value>${db.pool}</value>
+		</property>
+		<property name="maxConns">
+			<value>${db.pool.maxconns}</value>
+		</property>
+		<property name="minConns">
+			<value>${db.pool.minconns}</value>
+		</property>
+		<property name="initConns">
+			<value>${db.pool.minconns}</value>
+		</property>
+		<property name="default">
+			<value>true</value>
+		</property>
+		<!--<property name="listener">
+			<ref bean="DbAccessOperationListener"/>
+		</property>-->
+	</bean>
+	<!-- 数据库操作监听，此处用作edi数据同步 -->
+	<!--<bean id="DbAccessOperationListener" class="com.asc.framework.edi.gather.dbac.DbAccessOperationListener"/>-->
+	<!-- 数据库访问会话工厂定义 -->
+	<bean id="SessionFactory" class="com.mixky.dbac.SessionFactory">
+		<property name="dataSources">
+			<list>
+				<ref bean="DefaultDataSource"/>
+			</list>
+		</property>
+	</bean>
+	<!--deinition of designobject service(for remote access)-->
+	<bean id="DesignObjectService" class="com.asc.framework.designobject.service.DesignObjectService">
+		<property name="objAccess">
+			<ref bean="WsDesignObjectAccessor"/>
+		</property>
+	</bean>
+	<bean id="WsDesignObjectAccessor" class="com.asc.framework.designobject.accessor.imp.WsDesignObjectAccessor">
+		<property name="namespace">
+			<value>http://ws.service.framework.asc.com</value>
+		</property>
+	</bean>
+	<!--definition of context event handler-->
+	<bean id="ApplicationContextEventHandler" class="com.asc.framework.system.loader.ApplicationContextEventHandler">
+		<property name="listeners">
+			<list>
+				<ref bean="ApplicationControlLoader"/>
+			</list>
+		</property>
+	</bean>
+	<bean id="ApplicationControlLoader" class="com.asc.framework.system.loader.ApplicationControlLoader"/>
+	<!--end definition of context event handler-->
+	
+	<!-- definition of application status contoller -->
+	<bean id="ApplicationController" class="com.asc.framework.app.ApplicationController">
+		<property name="autoStart">
+			<value>true</value>
+		</property>
+		<property name="listeners">
+			<map>
+				<entry key="statusListener">
+					<ref bean="PortalAppStatusListener"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="PortalAppStatusListener" class="com.asc.framework.portal.PortalAppStatusListener"/>
+	<!-- <bean id="LogFactoryStatusListener" class="com.asc.framework.app.listeners.LogFactoryStatusListener"/> -->
+	<!-- end definition of applocation status controller -->
+	
+	<!--definition of context variables parser-->
+	<bean id="ContextVariablesParser" class="com.asc.commons.context.ContextVariablesParser">
+		<property name="parsers">
+			<map>
+				<entry key="app-parser">
+					<ref bean="PortalContextVariableParser"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="PortalContextVariableParser" class="com.asc.portal.context.PortalContextVariableParser"/>
+	<!--end definition of context variables parser-->
+	
+	<bean id="AscUserCertification" class="com.asc.commons.certification.AscUserCertification">
+		<property name="certification">
+			<ref bean="AscUserCertificationPortalImp"/>
+		</property>
+	</bean>
+	<bean id="AscUserCertificationPortalImp" class="com.asc.portal.certification.AscUserCertificationPortalImp"/>
+	
+	<!--definition of user preferences manager-->
+	<bean id="PreferencesManager" class="com.asc.portal.preferences.PreferencesManager">
+		<property name="autoLoad">
+			<value>true</value>
+		</property>
+		<property name="serializer">
+			<ref bean="PreferencesSerialize"/>
+		</property>
+	</bean>
+	<bean id="PreferencesSerialize" class="com.asc.portal.preferences.serialize.PreferencesDbSerialize"/>
+	<!--end definition of user preferences manager-->
+	
+	<bean id="AbsWsAccessor" abstract="true">
+		<property name="namespace">
+			<value>http://service.webservice.bs.asc.com</value>
+		</property>
+		<property name="wsDomain">
+			<value>${bs.domain}</value>
+		</property>
+	</bean>
+	
+	<bean id="AppEntWsAccessor" parent="AbsWsAccessor" class="com.asc.framework.service.client.AppEntWsAccessor">
+		<property name="wsName">
+			<value>AppEntWebService</value>
+		</property>
+	</bean>
+	<bean id="ApplicationWsAccessor" parent="AbsWsAccessor" class="com.asc.framework.service.client.ApplicationWsAccessor">
+		<property name="wsName">
+			<value>ApplicationWebService</value>
+		</property>
+	</bean>
+	<bean id="DictionaryWsAccessor" parent="AbsWsAccessor" class="com.asc.framework.service.client.DictionaryWsAccessor">
+		<property name="wsName">
+			<value>DictionaryWebService</value>
+		</property>
+	</bean>
+	<bean id="OrganizationWsAccessor" parent="AbsWsAccessor" class="com.asc.framework.service.client.OrganizationWsAccessor">
+		<property name="wsName">
+			<value>OrganizationWebService</value>
+		</property>
+	</bean>
+	<bean id="ModuleRoleMappingWsAccessor" parent="AbsWsAccessor" class="com.asc.framework.service.client.ModuleRoleMappingWsAccessor">
+		<property name="wsName">
+			<value>ModuleRoleMappingWebService</value>
+		</property>
+	</bean>
+	<bean id="WorkFlowRoleMappingWsAccessor" parent="AbsWsAccessor" class="com.asc.framework.service.client.WorkFlowRoleMappingWsAccessor">
+		<property name="wsName">
+			<value>WorkFlowRoleMappingWebService</value>
+		</property>
+	</bean>
+	<bean id="LogConfigWsAccessor" parent="AbsWsAccessor" class="com.asc.framework.service.client.LogConfigWsAccessor">
+		<property name="wsName">
+			<value>LogConfigWebService</value>
+		</property>
+	</bean>
+</beans>

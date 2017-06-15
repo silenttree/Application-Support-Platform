@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<!-- definition of central authorization service -->
+	<bean id="CentralAuthenticationService" class="com.asc.cas.server.CentralAuthenticationService">
+		<property name="authService">
+			<ref bean="AuthenticationServiceImp"/>
+		</property>
+	</bean>
+	<bean id="AuthenticationServiceImp" class="com.asc.cas.server.AuthenticationServiceImp">
+		<property name="VerifyService">
+			<ref bean="DefaultVerification"/>
+		</property>
+		<property name="ticketService">
+			<ref bean="TicketService"/>
+		</property>
+		<property name="authListener">
+			<ref bean="HttpBaseAuthenticationListenerImp"/>
+		</property>
+	</bean>
+	<bean id="DefaultVerification" class="com.asc.cas.server.authentication.DefaultVerification">
+		<property name="authListener">
+			<ref bean="HttpBaseAuthenticationListenerImp"/>
+		</property>
+	</bean>
+	<bean id="TicketService" class="com.asc.cas.server.ticket.TicketService">
+		<property name="idGenerator">
+			<ref bean="UniqueIdGeneratorUuidImp"/>
+		</property>
+		<property name="ticketRegistry">
+			<ref bean="CachedMapTicketRegistry"/>
+		</property>
+		<property name="ticketStore">
+			<ref bean="TicketStoreHttpCookieImp"/>
+		</property>
+	</bean>
+	<bean id="UniqueIdGeneratorUuidImp" class="com.asc.cas.server.ticket.uniqueid.UniqueIdGeneratorUuidImp"/>
+	<bean id="CachedMapTicketRegistry" class="com.asc.cas.server.ticket.registry.CachedMapTicketRegistry"/>
+	<bean id="TicketStoreHttpCookieImp" class="com.asc.cas.server.ticket.store.TicketStoreHttpCookieImp"/>
+	<bean id="HttpBaseAuthenticationListenerImp" class="com.asc.portal.certification.HttpBaseAuthenticationListenerImp"/>
+	<!-- end definition of central authorization service -->
+	
+</beans>

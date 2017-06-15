@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd"
+	xmlns:jaxws="http://cxf.apache.org/jaxws">
+	
+	<bean id="ApplicationWebService" class="com.asc.bs.webservice.service.ApplicationWebService">
+		<property name="reader">
+			<ref bean="DbacApplicationReaderImp" />
+		</property>
+	</bean>
+	<jaxws:endpoint id="ep_ApplicationWebService"
+		implementorClass="com.asc.bs.webservice.service.ApplicationWebService"
+		implementor="#ApplicationWebService"
+		address="/ApplicationWebService" />
+	
+	<bean id="AppEntWebService" class="com.asc.bs.webservice.service.AppEntWebService">
+		<property name="reader">
+			<ref bean="DbacApplicationEntranceReader" />
+		</property>
+	</bean>
+	<jaxws:endpoint id="ep_AppEntWebService"
+		implementorClass="com.asc.bs.webservice.service.AppEntWebService"
+		implementor="#AppEntWebService"
+		address="/AppEntWebService" />
+	
+	<bean id="DictionaryWebService" class="com.asc.bs.webservice.service.DictionaryWebService">
+		<property name="reader">
+			<ref bean="DictionaryReaderImp" />
+		</property>
+	</bean>
+	<jaxws:endpoint id="ep_DictionaryWebService"
+		implementorClass="com.asc.bs.webservice.service.DictionaryWebService"
+		implementor="#DictionaryWebService"
+		address="/DictionaryWebService" />
+	
+	<bean id="DicdataRelationWebService" class="com.asc.bs.webservice.service.DicdataRelationWebService">
+		<property name="reader">
+			<ref bean="DicdataRelationReaderImp" />
+		</property>
+	</bean>
+	<jaxws:endpoint id="ep_DicdataRelationWebService"
+		implementorClass="com.asc.bs.webservice.service.DicdataRelationWebService"
+		implementor="#DicdataRelationWebService"
+		address="/DicdataRelationWebService" />
+	
+	<bean id="OrganizationWebService" class="com.asc.bs.webservice.service.OrganizationWebService">
+		<property name="reader">
+			<ref bean="OrganizationReaderImp" />
+		</property>
+		<property name="writer">
+			<ref bean="OrganizationWriterImp" />
+		</property>
+	</bean>
+	<jaxws:endpoint id="ep_OrganizationWebService"
+		implementorClass="com.asc.bs.webservice.service.OrganizationWebService"
+		implementor="#OrganizationWebService"
+		address="/OrganizationWebService" />
+	
+	<bean id="ModuleRoleMappingWebService" class="com.asc.bs.webservice.service.ModuleRoleMappingWebService">
+		<property name="reader">
+			<ref bean="DbacModuleRoleMappingAccessor" />
+		</property>
+	</bean>
+	<jaxws:endpoint id="ep_ModuleRoleMappingWebService"
+		implementorClass="com.asc.bs.webservice.service.ModuleRoleMappingWebService"
+		implementor="#ModuleRoleMappingWebService"
+		address="/ModuleRoleMappingWebService" />
+	
+	<bean id="WorkFlowRoleMappingWebService" class="com.asc.bs.webservice.service.WorkFlowRoleMappingWebService">
+		<property name="reader">
+			<ref bean="DbacWorkFlowRoleMappingAccessor" />
+		</property>
+	</bean>
+	<jaxws:endpoint id="ep_WorkFlowRoleMappingWebService"
+		implementorClass="com.asc.bs.webservice.service.WorkFlowRoleMappingWebService"
+		implementor="#WorkFlowRoleMappingWebService"
+		address="/WorkFlowRoleMappingWebService" />
+	
+	<bean id="LogConfigWebService" class="com.asc.bs.webservice.service.LogConfigWebService">
+		<property name="reader">
+			<ref bean="LogConfigReaderImpl" />
+		</property>
+	</bean>
+	<jaxws:endpoint id="ep_LogConfigWebService"
+		implementorClass="com.asc.bs.webservice.service.LogConfigWebService"
+		implementor="#LogConfigWebService"
+		address="/LogConfigWebService" />
+		
+	<bean id="DataFilterSettingsWebService" class="com.asc.bs.webservice.service.DataFilterSettingsWebService">
+		<property name="readerImpl">
+			<ref bean="DataFilterSettingsReaderImpl"/>
+		</property>
+	</bean>
+	<bean id="DataFilterSettingsReaderImpl" class="com.asc.bs.datafilter.access.imp.DataFilterSettingsReaderImpl"/>
+	
+	<jaxws:endpoint id="ep_DataFilterSettingsWebService"
+		implementorClass="com.asc.bs.webservice.service.DataFilterSettingsWebService"
+		implementor="#DataFilterSettingsWebService"
+		address="/DataFilterSettingsWebService" />
+		
+	<bean id="DocWebService" class="com.asc.bs.webservice.service.DocWebService">
+		<property name="reader">
+			<ref bean="DocReaderImp" />
+		</property>
+	</bean>
+	<jaxws:endpoint id="ep_DocWebService"
+		implementor="#DocWebService"
+		address="/DocWebService" />
+		
+		
+	<!-- <bean id="LogConfigReaderImpl" class="com.asc.bs.log.access.imp.LogConfigReaderImpl"/> -->
+
+	<!-- 定义方法调用拦截器，为webservice实现调用记录日志 -->
+	<!-- 
+	<bean id="ServiceInvokeLogInterceptor" class="com.asc.bs.log.aop.ServiceInvokeLogInterceptor" />
+	<bean id="AllMethodPointCut" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice">
+			<ref local="ServiceInvokeLogInterceptor" />
+		</property>
+		<property name="patterns">
+			<list>
+				<value>.*.</value>
+			</list>
+		</property>
+	</bean>
+	-->
+	<!-- 以下使用spring代理定义service实现拦截 -->
+	<bean id="DbacApplicationReaderImp" class="com.asc.bs.application.access.imp.DbacApplicationReaderImp" />
+	<!-- <bean id="DbacApplicationReaderImp" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target">
+			<ref local="DbacApplicationReaderImpBean" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>AllMethodPointCut</value>
+			</list>
+		</property>
+	</bean> -->
+
+	<bean id="DbacApplicationEntranceReader" class="com.asc.bs.entrance.access.imp.DbacApplicationEntranceReader" />
+	<!-- <bean id="DbacApplicationEntranceReader" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target">
+			<ref local="DbacApplicationEntranceReaderBean" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>AllMethodPointCut</value>
+			</list>
+		</property>
+	</bean> -->
+
+	<bean id="DictionaryReaderImp" class="com.asc.bs.dictionary.access.imp.DictionaryReaderImp" />
+	<!-- <bean id="DictionaryReaderImp" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target">
+			<ref local="DictionaryReaderImpBean" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>AllMethodPointCut</value>
+			</list>
+		</property>
+	</bean> -->
+	<bean id="ExtpropertyReaderImp" class="com.asc.bs.extproperty.access.imp.ExtpropertyReaderImp" />
+	<!-- <bean id="ExtpropertyReaderImp" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target">
+			<ref local="ExtpropertyReaderImpBean" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>AllMethodPointCut</value>
+			</list>
+		</property>
+	</bean> -->
+	<bean id="DicdataRelationReaderImp" class="com.asc.bs.dicdatarelation.access.imp.DicdataRelationReaderImp" />
+	<!--bean id="DicdataRelationReaderImp" class="org.springframework.aop.framework.ProxyFactoryBean"> 
+		<property name="target"> <ref local="DicdataRelationReaderImpBean"/> </property> 
+		<property name="interceptorNames"> <list> <value>AllMethodPointCut</value> 
+		</list> </property> </bean -->
+
+	<bean id="OrganizationReaderImp" class="com.asc.bs.organization.access.imp.OrganizationReaderImp" />
+	<!-- <bean id="OrganizationReaderImp" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target">
+			<ref local="OrganizationReaderImpBean" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>AllMethodPointCut</value>
+			</list>
+		</property>
+	</bean> -->
+	<bean id="OrganizationWriterImp" class="com.asc.bs.organization.access.imp.OrganizationWriterImp" />
+
+	<bean id="DbacModuleRoleMappingAccessor" class="com.asc.bs.mrmapping.access.dbacimp.DbacModuleRoleMappingAccessor" />
+	<!-- <bean id="DbacModuleRoleMappingAccessor" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target">
+			<ref local="DbacModuleRoleMappingAccessorBean" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>AllMethodPointCut</value>
+			</list>
+		</property>
+	</bean> -->
+
+	<bean id="DbacWorkFlowRoleMappingAccessor" class="com.asc.bs.wfrmapping.access.dbacimp.DbacWorkFlowRoleMappingAccessor" />
+	<!-- <bean id="DbacWorkFlowRoleMappingAccessor" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target">
+			<ref local="DbacWorkFlowRoleMappingAccessorBean" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>AllMethodPointCut</value>
+			</list>
+		</property>
+	</bean> -->
+
+	<bean id="LogConfigReaderImpl" class="com.asc.bs.log.access.imp.LogConfigReaderImpl" />
+	<!-- <bean id="LogConfigReaderImpl" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target">
+			<ref local="LogConfigReaderImplBean" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>AllMethodPointCut</value>
+			</list>
+		</property>
+	</bean> -->
+	<bean id="LogQueryWsService" class="com.asc.framework.service.ws.LogQueryWsService" />
+</beans>

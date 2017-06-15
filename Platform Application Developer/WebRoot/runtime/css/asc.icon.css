@@ -1,0 +1,104 @@
+.icon-app-cross {background-image: url(../../resources/icon/app/cross.png) !important;}
+.icon-app-oa {background-image: url(../../resources/icon/app/oa.png) !important;}
+.icon-app-wapl {background-image: url(../../resources/icon/app/wapl.png) !important;}
+.icon-app-waps {background-image: url(../../resources/icon/app/waps.png) !important;}
+.icon-designer-appconn {background-image: url(../../resources/icon/designer/appconn.png) !important;}
+.icon-designer-button {background-image: url(../../resources/icon/designer/button.png) !important;}
+.icon-designer-connect {background-image: url(../../resources/icon/designer/connect.png) !important;}
+.icon-designer-dataaccessfolder {background-image: url(../../resources/icon/designer/dataaccessfolder.png) !important;}
+.icon-designer-datasource {background-image: url(../../resources/icon/designer/datasource.png) !important;}
+.icon-designer-datasourcefolder {background-image: url(../../resources/icon/designer/datasourcefolder.png) !important;}
+.icon-designer-dictionary {background-image: url(../../resources/icon/designer/dictionary.png) !important;}
+.icon-designer-dictionaryfolder {background-image: url(../../resources/icon/designer/dictionaryfolder.png) !important;}
+.icon-designer-document {background-image: url(../../resources/icon/designer/document.png) !important;}
+.icon-designer-documentfolder {background-image: url(../../resources/icon/designer/documentfolder.png) !important;}
+.icon-designer-documenttypefolder {background-image: url(../../resources/icon/designer/documenttypefolder.png) !important;}
+.icon-designer-emptyValue {background-image: url(../../resources/icon/designer/emptyValue.png) !important;}
+.icon-designer-esbappevent {background-image: url(../../resources/icon/designer/esbappevent.png) !important;}
+.icon-designer-esbappservice {background-image: url(../../resources/icon/designer/esbappservice.png) !important;}
+.icon-designer-esbserviceeventfolder {background-image: url(../../resources/icon/designer/esbserviceeventfolder.png) !important;}
+.icon-designer-esbworkflowfolder {background-image: url(../../resources/icon/designer/esbworkflowfolder.png) !important;}
+.icon-designer-extjslogo {background-image: url(../../resources/icon/designer/extjslogo.png) !important;}
+.icon-designer-flow {background-image: url(../../resources/icon/designer/flow.png) !important;}
+.icon-designer-flowrole {background-image: url(../../resources/icon/designer/flowrole.png) !important;}
+.icon-designer-form {background-image: url(../../resources/icon/designer/form.png) !important;}
+.icon-designer-formfolder {background-image: url(../../resources/icon/designer/formfolder.png) !important;}
+.icon-designer-formpositionlayout {background-image: url(../../resources/icon/designer/formpositionlayout.png) !important;}
+.icon-designer-formtablelayout {background-image: url(../../resources/icon/designer/formtablelayout.png) !important;}
+.icon-designer-inputfield {background-image: url(../../resources/icon/designer/inputfield.png) !important;}
+.icon-designer-layout {background-image: url(../../resources/icon/designer/layout.png) !important;}
+.icon-designer-layoutfolder {background-image: url(../../resources/icon/designer/layoutfolder.png) !important;}
+.icon-designer-menu {background-image: url(../../resources/icon/designer/menu.png) !important;}
+.icon-designer-menufolder {background-image: url(../../resources/icon/designer/menufolder.png) !important;}
+.icon-designer-module {background-image: url(../../resources/icon/designer/module.png) !important;}
+.icon-designer-moduleauthorities {background-image: url(../../resources/icon/designer/moduleauthorities.png) !important;}
+.icon-designer-modulefolder {background-image: url(../../resources/icon/designer/modulefolder.png) !important;}
+.icon-designer-modulemenufolder {background-image: url(../../resources/icon/designer/modulemenufolder.png) !important;}
+.icon-designer-modulerole {background-image: url(../../resources/icon/designer/modulerole.png) !important;}
+.icon-designer-modulerolefolder {background-image: url(../../resources/icon/designer/modulerolefolder.png) !important;}
+.icon-designer-node {background-image: url(../../resources/icon/designer/node.gif) !important;}
+.icon-designer-noEmptyValue {background-image: url(../../resources/icon/designer/noEmptyValue.png) !important;}
+.icon-designer-object {background-image: url(../../resources/icon/designer/object.png) !important;}
+.icon-designer-pagefolder {background-image: url(../../resources/icon/designer/pagefolder.png) !important;}
+.icon-designer-portalfolder {background-image: url(../../resources/icon/designer/portalfolder.png) !important;}
+.icon-designer-portletfolder {background-image: url(../../resources/icon/designer/portletfolder.png) !important;}
+.icon-designer-query {background-image: url(../../resources/icon/designer/query.png) !important;}
+.icon-designer-queryfolder {background-image: url(../../resources/icon/designer/queryfolder.png) !important;}
+.icon-designer-queryform {background-image: url(../../resources/icon/designer/queryform.png) !important;}
+.icon-designer-queryformfolder {background-image: url(../../resources/icon/designer/queryformfolder.png) !important;}
+.icon-designer-reference {background-image: url(../../resources/icon/designer/reference.png) !important;}
+.icon-designer-root {background-image: url(../../resources/icon/designer/root.png) !important;}
+.icon-designer-route {background-image: url(../../resources/icon/designer/route.png) !important;}
+.icon-designer-serviceflow {background-image: url(../../resources/icon/designer/serviceflow.png) !important;}
+.icon-designer-sfnode {background-image: url(../../resources/icon/designer/sfnode.png) !important;}
+.icon-designer-sfroute {background-image: url(../../resources/icon/designer/sfroute.png) !important;}
+.icon-designer-shortcutfolder {background-image: url(../../resources/icon/designer/shortcutfolder.gif) !important;}
+.icon-designer-table {background-image: url(../../resources/icon/designer/table.png) !important;}
+.icon-designer-tablefolder {background-image: url(../../resources/icon/designer/tablefolder.png) !important;}
+.icon-designer-template {background-image: url(../../resources/icon/designer/template.png) !important;}
+.icon-designer-templates {background-image: url(../../resources/icon/designer/templates.png) !important;}
+.icon-designer-urlpagefolder {background-image: url(../../resources/icon/designer/urlpagefolder.png) !important;}
+.icon-designer-view {background-image: url(../../resources/icon/designer/view.png) !important;}
+.icon-designer-viewfield {background-image: url(../../resources/icon/designer/viewfield.png) !important;}
+.icon-designer-viewfolder {background-image: url(../../resources/icon/designer/viewfolder.png) !important;}
+.icon-designer-viewqueryparameter {background-image: url(../../resources/icon/designer/viewqueryparameter.png) !important;}
+.icon-designer-window {background-image: url(../../resources/icon/designer/window.png) !important;}
+.icon-designer-WorkFlowFolder {background-image: url(../../resources/icon/designer/WorkFlowFolder.png) !important;}
+.icon-logo {background-image: url(../../resources/icon/logo.png) !important;}
+.icon-sys-about {background-image: url(../../resources/icon/sys/about.png) !important;}
+.icon-sys-accept {background-image: url(../../resources/icon/sys/accept.png) !important;}
+.icon-sys-add {background-image: url(../../resources/icon/sys/add.png) !important;}
+.icon-sys-apply {background-image: url(../../resources/icon/sys/apply.png) !important;}
+.icon-sys-book {background-image: url(../../resources/icon/sys/book.png) !important;}
+.icon-sys-build {background-image: url(../../resources/icon/sys/build.png) !important;}
+.icon-sys-cancel {background-image: url(../../resources/icon/sys/cancel.png) !important;}
+.icon-sys-class {background-image: url(../../resources/icon/sys/class.png) !important;}
+.icon-sys-close {background-image: url(../../resources/icon/sys/close.png) !important;}
+.icon-sys-closeall {background-image: url(../../resources/icon/sys/closeall.png) !important;}
+.icon-sys-confirm {background-image: url(../../resources/icon/sys/confirm.png) !important;}
+.icon-sys-copy {background-image: url(../../resources/icon/sys/copy.png) !important;}
+.icon-sys-createtable {background-image: url(../../resources/icon/sys/createtable.png) !important;}
+.icon-sys-delete {background-image: url(../../resources/icon/sys/delete.png) !important;}
+.icon-sys-desktop {background-image: url(../../resources/icon/sys/desktop.png) !important;}
+.icon-sys-edit {background-image: url(../../resources/icon/sys/edit.png) !important;}
+.icon-sys-exit {background-image: url(../../resources/icon/sys/exit.png) !important;}
+.icon-sys-extjslogo {background-image: url(../../resources/icon/sys/extjslogo.png) !important;}
+.icon-sys-importfield {background-image: url(../../resources/icon/sys/importfield.png) !important;}
+.icon-sys-movedown {background-image: url(../../resources/icon/sys/movedown.png) !important;}
+.icon-sys-moveup {background-image: url(../../resources/icon/sys/moveup.png) !important;}
+.icon-sys-open {background-image: url(../../resources/icon/sys/open.png) !important;}
+.icon-sys-password {background-image: url(../../resources/icon/sys/password.png) !important;}
+.icon-sys-paste {background-image: url(../../resources/icon/sys/paste.png) !important;}
+.icon-sys-preferences {background-image: url(../../resources/icon/sys/preferences.png) !important;}
+.icon-sys-profile {background-image: url(../../resources/icon/sys/profile.png) !important;}
+.icon-sys-refresh {background-image: url(../../resources/icon/sys/refresh.png) !important;}
+.icon-sys-rename {background-image: url(../../resources/icon/sys/rename.png) !important;}
+.icon-sys-save {background-image: url(../../resources/icon/sys/save.png) !important;}
+.icon-sys-setting {background-image: url(../../resources/icon/sys/setting.png) !important;}
+.icon-sys-shortcut {background-image: url(../../resources/icon/sys/shortcut.png) !important;}
+.icon-sys-top {background-image: url(../../resources/icon/sys/top.png) !important;}
+.icon-sys-upload {background-image: url(../../resources/icon/sys/upload.png) !important;}
+.icon-sys-user {background-image: url(../../resources/icon/sys/user.png) !important;}
+.icon-sys-window {background-image: url(../../resources/icon/sys/window.png) !important;}
+.icon-WorkFlowFolder {background-image: url(../../resources/icon/WorkFlowFolder.png) !important;}
+

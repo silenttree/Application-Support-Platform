@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    <bean id="configBean" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="fileEncoding">
+			<value>UTF-8</value>
+		</property>
+		<property name="location">
+			<value>/WEB-INF/param.properties</value>
+		</property>
+	</bean>
+	<import resource="core-config.xml"/>
+	<!--此处添加仅属于当前应用系统的bean配置-->
+	<!--如应用系统bean配置较多，且需要按类型独立管理，可单独建立配置文件目录自行管理-->
+	<!--import resource="esb-config.xml"/-->
+	
+</beans>

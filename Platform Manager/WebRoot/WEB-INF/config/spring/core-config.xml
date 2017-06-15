@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<!-- 应用参数配置 -->
+	<bean id="AppConfiguration" class="com.asc.framework.app.AppConfiguration">
+		<property name="appId">
+			<value>${app.id}</value>
+		</property>
+		<property name="appName">
+			<value>${app.name}</value>
+		</property>
+		<property name="appTitle">
+			<value>${app.title}</value>
+		</property>
+		<property name="appLicense">
+			<value>${app.license}</value>
+		</property>
+		<property name="appMode">
+			<value>${app.mode}</value>
+		</property>
+	</bean>
+
+	<bean id="DefaultDataSource" class="com.mixky.dbac.datasource.DataSource">
+		<property name="name">
+			<value>platformDsn</value>
+		</property>
+		<property name="dbTypeStr">
+			<value>${db.type}</value>
+		</property>
+		<property name="url">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc.user}</value>
+		</property>
+		<property name="userpass">
+			<value>${jdbc.passwd}</value>
+		</property>
+		<property name="maxConns">
+			<value>${db.pool.maxconns}</value>
+		</property>
+		<property name="minConns">
+			<value>${db.pool.minconns}</value>
+		</property>
+		<property name="initConns">
+			<value>${db.pool.initconns}</value>
+		</property>
+		<property name="default">
+			<value>true</value>
+		</property>
+		<property name="idGenerator">
+			<value>${db.idgenerator}</value>
+		</property>
+	</bean>
+
+	<bean id="SessionFactory" class="com.mixky.dbac.SessionFactory">
+		<property name="dataSources">
+			<list>
+				<ref bean="DefaultDataSource"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- definition of application status contoller -->
+	<bean id="ApplicationController" class="com.asc.framework.app.ApplicationController">
+		<property name="autoStart">
+			<value>true</value>
+		</property>
+		<property name="listeners">
+			<map>
+				<entry key="statusListener">
+					<ref bean="ManagerAppStatusListener"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="ManagerAppStatusListener" class="com.asc.framework.manager.ManagerAppStatusListener"/>
+	<!-- end definition of applocation status controller -->
+	
+	<!--deinition of designobject service(for remote access)-->
+	<bean id="DesignObjectService" class="com.asc.framework.designobject.service.DesignObjectService">
+		<property name="objAccess">
+			<ref bean="WsDesignObjectAccessor"/>
+		</property>
+	</bean>
+	<bean id="WsDesignObjectAccessor" class="com.asc.framework.designobject.accessor.imp.WsDesignObjectAccessor">
+		<property name="namespace">
+			<value>http://ws.service.framework.asc.com</value>
+		</property>
+	</bean>
+	<!--end definition of designobject service-->
+	
+	<!--deinition of application service(for remote access)-->
+	<bean id="WsApplicationAccessor" class="com.asc.manager.webservice.impl.WsApplicationAccessor">
+		<property name="namespace">
+			<value>http://ws.service.framework.asc.com</value>
+		</property>
+	</bean>
+	<!--end definition of application service-->
+	
+	<!-- beans of user certification(intergrate with cas) in webapp -->
+	<bean id="AscUserCertification" class="com.asc.commons.certification.AscUserCertification">
+		<property name="certification">
+			<ref bean="CasUserCertificationImp"/>
+		</property>
+	</bean>
+	<bean id="CasUserCertificationImp" class="com.asc.framework.certfication.cas.imp.CasUserCertificationImp">
+		<property name="casLoginUrl">
+			<value>${cas.loginurl}</value>
+		</property>
+		<property name="casServiceUrl">
+			<value>${cas.serviceurl}</value>
+		</property>
+	</bean>
+	<bean id="CasWebAppIntergration" class="com.asc.framework.certfication.cas.CasWebAppIntergration">
+		<property name="casModeImp">
+			<ref bean="CasUserCertificationImp"/>
+		</property>
+	</bean>
+	<bean id="UserStatusRegistry" class="com.asc.framework.certfication.registry.UserStatusRegistry">
+		<property name="ticketStore">
+			<ref bean="TicketStoreCookieImp"/>
+		</property>
+	</bean>
+	<bean id="TicketStoreCookieImp" class="com.asc.framework.certfication.registry.imp.TicketStoreCookieImp"/>
+	<!-- end difinition of user certification -->
+
+	<!--definition of context event handler-->
+	<bean id="ApplicationContextEventHandler" class="com.asc.framework.system.loader.ApplicationContextEventHandler">
+		<property name="listeners">
+			<list>
+				<ref bean="ApplicationControlLoader"/>
+			</list>
+		</property>
+	</bean>
+	<bean id="ApplicationControlLoader" class="com.asc.framework.system.loader.ApplicationControlLoader"/>
+	<!--end definition of context event handler-->
+	
+	<!--definition of context variables parser-->
+	<bean id="ContextVariablesParser" class="com.asc.commons.context.ContextVariablesParser">
+		<property name="parsers">
+			<map>
+				<entry key="mgr-parser">
+					<ref bean="ManagerContextVariablesParser"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="ManagerContextVariablesParser" class="com.asc.manager.context.ManagerContextVariablesParser"/>
+	<!--end definition of context variables parser-->
+	
+	<bean id="DbacApplicationReaderImp" class="com.asc.bs.application.access.imp.DbacApplicationReaderImp"/>
+	<bean id="DbacApplicationEntranceReader" class="com.asc.bs.entrance.access.imp.DbacApplicationEntranceReader"/>
+	<bean id="DictionaryReaderImp" class="com.asc.bs.dictionary.access.imp.DictionaryReaderImp"/>
+	<bean id="ExtpropertyReaderImp" class="com.asc.bs.extproperty.access.imp.ExtpropertyReaderImp"/>
+	<bean id="DicdataRelationReaderImp" class="com.asc.bs.dicdatarelation.access.imp.DicdataRelationReaderImp"/>
+	<bean id="OrganizationReaderImp" class="com.asc.bs.organization.access.imp.OrganizationReaderImp"/>
+	<bean id="DbacModuleRoleMappingAccessor" class="com.asc.bs.mrmapping.access.dbacimp.DbacModuleRoleMappingAccessor"/>
+	<bean id="DbacWorkFlowRoleMappingAccessor" class="com.asc.bs.wfrmapping.access.dbacimp.DbacWorkFlowRoleMappingAccessor"/>
+	<!--<bean id="EdiConfiguationReaderImpl" class="com.asc.bs.edi.access.impl.EdiConfiguationReaderImpl"/>-->
+	<bean id="AbsWsAccessor" abstract="true">
+		<property name="namespace">
+			<value>http://service.webservice.bs.asc.com</value>
+		</property>
+		<property name="wsDomain">
+			<value>${bs.domain}</value>
+		</property>
+	</bean>
+	
+	<bean id="AppEntWsAccessor" parent="AbsWsAccessor" class="com.asc.framework.service.client.AppEntWsAccessor">
+		<property name="wsName">
+			<value>AppEntWebService</value>
+		</property>
+	</bean>
+	<bean id="ApplicationWsAccessor" parent="AbsWsAccessor" class="com.asc.framework.service.client.ApplicationWsAccessor">
+		<property name="wsName">
+			<value>ApplicationWebService</value>
+		</property>
+	</bean>
+	<bean id="DictionaryWsAccessor" parent="AbsWsAccessor" class="com.asc.framework.service.client.DictionaryWsAccessor">
+		<property name="wsName">
+			<value>DictionaryWebService</value>
+		</property>
+	</bean>
+	<bean id="DicdataRelationService" class="com.asc.commons.dicdatarelation.service.DicdataRelationService">
+		<property name="relationReader">
+			<ref bean="DicdataRelationReaderImp"/>
+		</property>
+	</bean>
+	<bean id="OrganizationWsAccessor" parent="AbsWsAccessor" class="com.asc.framework.service.client.OrganizationWsAccessor">
+		<property name="wsName">
+			<value>OrganizationWebService</value>
+		</property>
+	</bean>
+	<bean id="ModuleRoleMappingWsAccessor" parent="AbsWsAccessor" class="com.asc.framework.service.client.ModuleRoleMappingWsAccessor">
+		<property name="wsName">
+			<value>ModuleRoleMappingWebService</value>
+		</property>
+	</bean>
+	<bean id="WorkFlowRoleMappingWsAccessor" parent="AbsWsAccessor" class="com.asc.framework.service.client.WorkFlowRoleMappingWsAccessor">
+		<property name="wsName">
+			<value>WorkFlowRoleMappingWebService</value>
+		</property>
+	</bean>
+	<bean id="LogConfigWsAccessor" parent="AbsWsAccessor" class="com.asc.framework.service.client.LogConfigWsAccessor">
+		<property name="wsName">
+			<value>LogConfigWebService</value>
+		</property>
+	</bean>
+	
+	<bean id="ApplicationService" class="com.asc.commons.application.service.ApplicationService">
+		<property name="reader">
+			<ref bean="DbacApplicationReaderImp"/>
+		</property>
+	</bean>
+	<bean id="ApplicationEntranceService" class="com.asc.commons.applicationentrance.service.ApplicationEntranceService">
+		<property name="reader">
+			<ref bean="DbacApplicationEntranceReader"/>
+		</property>
+	</bean>
+	<bean id="OrganizationService" class="com.asc.commons.organization.service.OrganizationService">
+		<property name="orgReader">
+			<ref bean="OrganizationReaderImp"/>
+		</property>
+	</bean>
+	<bean id="DictionaryService" class="com.asc.commons.dictionary.service.DictionaryService">
+		<property name="dicReader">
+			<ref bean="DictionaryReaderImp"/>
+		</property>
+	</bean>
+	<bean id="ExtpropertyService" class="com.asc.commons.extproperty.service.ExtpropertyService">
+		<property name="extproReader">
+			<ref bean="ExtpropertyReaderImp"/>
+		</property>
+	</bean>
+	<bean id="ModuleRoleMappingService" class="com.asc.commons.modulerolemapping.service.ModuleRoleMappingService">
+		<property name="reader">
+			<ref bean="DbacModuleRoleMappingAccessor"/>
+		</property>
+	</bean>
+	<bean id="WorkFlowRoleMappingService" class="com.asc.commons.wfrolemapping.service.WorkFlowRoleMappingService">
+		<property name="reader">
+			<ref bean="DbacWorkFlowRoleMappingAccessor"/>
+		</property>
+	</bean>	
+	
+	<bean id="DataFilterSettigsService" class="com.asc.commons.datafilter.service.DataFilterSettigsService">
+		<property name="readerImp">
+			<ref bean="DataFilterSettingsReaderImpl"/>
+		</property>
+	</bean>
+	<bean id="DataFilterSettingsReaderImpl" class="com.asc.bs.datafilter.access.imp.DataFilterSettingsReaderImpl"></bean>
+	
+	<bean id="DataFilterSettigsServiceWriter" class="com.asc.commons.datafilter.service.DataFilterSettigsServiceWriter">
+		<property name="writer">
+			<ref bean="DataFilterSettingsWriterImpl"/>
+		</property>
+	</bean>
+	<bean id="DataFilterSettingsWriterImpl" class="com.asc.bs.datafilter.access.imp.DataFilterSettingsWriterImpl"></bean>
+</beans>

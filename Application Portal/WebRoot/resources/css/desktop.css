@@ -1,0 +1,134 @@
+.asc-desktop-header-body{
+	background-color : transparent;
+}
+
+.asc-btn-shortcut:not(.x-over){
+	background-color : transparent;
+	background-image : none;
+}
+
+.asc-desktop-title-body{
+	padding-top : 5px;
+	padding-left : 10px;
+	font-size : 18px;
+	font-weight : bold;
+	font-family : 微软雅黑;
+	color : #5584BA;
+	letter-spacing : 3px;
+	background-color : transparent;
+}
+
+.asc-desktop-footer-body{
+	text-align : center;
+	color: #ddd;
+	text-shadow: 0 0 0,1px 1px 0 #333,1px 1px 0 #444;
+	background-color : transparent;
+}
+
+.asc-system-preferences-editor-title-body{
+	padding : 5px;
+	background-color : transparent;
+	font-size : 16px;
+	font-weight : bold;
+}
+
+/* Desktop preferences css begin*/
+
+.x-view-selected {
+	background: #c3daf9 none;
+}
+
+.x-view-over {
+	background: #f1f1f1 none;
+}
+
+.x-item-selected {
+	background: #c3daf9 none;
+}
+
+.pref-view-thumb-wrap {
+	float: left;
+	margin: 4px;
+	margin-right: 0;
+	padding: 8px;
+}
+
+.pref-view-thumb-wrap span {
+	display: block;
+	overflow: hidden;
+	padding: 5px;
+	text-align: center;
+}
+
+#x-webpage-header
+{
+	border:0 none;
+	background:#1E4176 url(../images/hd-bg.gif) repeat-x 0 0;
+	padding-top:2px;
+	padding-left:10px;
+	padding-bottom:2px;
+    font:bold 16px tahoma, arial, 宋体, sans-serif;
+    color:white;
+    height:32px;
+}
+
+.x-form-display-field{
+	background-color : #FAFAFA;
+}
+.x-form-display-field-body{
+	background-color : #FAFAFA;
+}
+
+
+.asc-cdruselector-view-items {
+	background-color:#eff5fb; 
+	float: left; 
+	margin: 4px; 
+	margin-right: 0;
+	cursor: default;
+	width: 120px;
+	padding: 2px; 
+	border: 1px solid #99bbe8;
+	background-position: center left; 
+	background-repeat: no-repeat;
+}
+
+.asc-cdruselector-view-items-selected {
+	background-color: #9aa0a6; 
+	float: left; 
+	margin: 4px; 
+	margin-right: 0;
+	cursor: default;
+	width: 120px;
+	padding: 2px; 
+	border:1px solid #99bbe8;
+	background-position: center left; 
+	background-repeat: no-repeat;
+}
+
+.asc-cdruselector-view-items:hover {
+	float: left; 
+	margin: 4px; 
+	margin-right: 0;
+	cursor: default;
+	width: 120px;
+	padding: 2px; 
+	border:1px solid #446693;
+	background-position: center left; 
+	background-repeat: no-repeat;
+}
+.asc-cdruselector-view-icon-div{
+	width:16px; 
+	height: 16px; 
+	display:inline-block;
+	text-align:left;
+	padding-left:19px;
+	background-position:center left; 
+	background-repeat: no-repeat;
+}
+
+/* Desktop preferences css end*/
+
+.x-form-time-trigger {
+    background-image: url('../../dependencies/ext-4.2.1/resources/themes/images/default/form/time-trigger.png') !important;
+}
