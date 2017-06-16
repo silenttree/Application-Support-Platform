@@ -1,0 +1,96 @@
+.icon-app-applicationregisterfolder {background-image: url(../../resources/icon/app/applicationregisterfolder.png) !important;}
+.icon-app-cross {background-image: url(../../resources/icon/app/cross.png) !important;}
+.icon-app-oa {background-image: url(../../resources/icon/app/oa.png) !important;}
+.icon-app-usermanager {background-image: url(../../resources/icon/app/usermanager.png) !important;}
+.icon-app-wapl {background-image: url(../../resources/icon/app/wapl.png) !important;}
+.icon-app-waps {background-image: url(../../resources/icon/app/waps.png) !important;}
+.icon-manager-applicationcachemanager {background-image: url(../../resources/icon/manager/applicationcachemanager.png) !important;}
+.icon-manager-applicationconfigfolder {background-image: url(../../resources/icon/manager/applicationconfigfolder.png) !important;}
+.icon-manager-applicationdictionarydataoverride {background-image: url(../../resources/icon/manager/applicationdictionarydataoverride.png) !important;}
+.icon-manager-applicationdictionaryfolder {background-image: url(../../resources/icon/manager/applicationdictionaryfolder.png) !important;}
+.icon-manager-applicationdictionaryoverride {background-image: url(../../resources/icon/manager/applicationdictionaryoverride.gif) !important;}
+.icon-manager-applicationentranceauthority {background-image: url(../../resources/icon/manager/applicationentranceauthority.png) !important;}
+.icon-manager-applicationentrancefolder {background-image: url(../../resources/icon/manager/applicationentrancefolder.png) !important;}
+.icon-manager-applicationentrancemanager {background-image: url(../../resources/icon/manager/applicationentrancemanager.png) !important;}
+.icon-manager-applicationesbinterface {background-image: url(../../resources/icon/manager/applicationesbinterface.png) !important;}
+.icon-manager-applicationflowinstance {background-image: url(../../resources/icon/manager/applicationflowinstance.png) !important;}
+.icon-manager-applicationlogfolder {background-image: url(../../resources/icon/manager/applicationlogfolder.png) !important;}
+.icon-manager-applicationmanagerfolder {background-image: url(../../resources/icon/manager/applicationmanagerfolder.png) !important;}
+.icon-manager-applicationmodulefolder {background-image: url(../../resources/icon/manager/applicationmodulefolder.png) !important;}
+.icon-manager-applicationmodulemenu {background-image: url(../../resources/icon/manager/applicationmodulemenu.png) !important;}
+.icon-manager-applicationmoduleroleauthorith {background-image: url(../../resources/icon/manager/applicationmoduleroleauthorith.png) !important;}
+.icon-manager-applicationmodulerolemapping {background-image: url(../../resources/icon/manager/applicationmodulerolemapping.png) !important;}
+.icon-manager-applicationportalprofile {background-image: url(../../resources/icon/manager/applicationportalprofile.png) !important;}
+.icon-manager-applicationregisterfolder {background-image: url(../../resources/icon/manager/applicationregisterfolder.png) !important;}
+.icon-manager-applicationscheduletask {background-image: url(../../resources/icon/manager/applicationscheduletask.png) !important;}
+.icon-manager-applicationsfolder {background-image: url(../../resources/icon/manager/applicationsfolder.png) !important;}
+.icon-manager-applicationstatemanager {background-image: url(../../resources/icon/manager/applicationstatemanager.png) !important;}
+.icon-manager-applicationstatepause {background-image: url(../../resources/icon/manager/applicationstatepause.png) !important;}
+.icon-manager-applicationstateresume {background-image: url(../../resources/icon/manager/applicationstateresume.png) !important;}
+.icon-manager-applicationstaterun {background-image: url(../../resources/icon/manager/applicationstaterun.png) !important;}
+.icon-manager-applicationstatestop {background-image: url(../../resources/icon/manager/applicationstatestop.png) !important;}
+.icon-manager-applicationsyslog {background-image: url(../../resources/icon/manager/applicationsyslog.png) !important;}
+.icon-manager-applicationuserlog {background-image: url(../../resources/icon/manager/applicationuserlog.png) !important;}
+.icon-manager-applicationworkflowconfig {background-image: url(../../resources/icon/manager/applicationworkflowconfig.png) !important;}
+.icon-manager-applicationworkflowfolder {background-image: url(../../resources/icon/manager/applicationworkflowfolder.png) !important;}
+.icon-manager-applicationworkflowrole {background-image: url(../../resources/icon/manager/applicationworkflowrole.png) !important;}
+.icon-manager-basedatamanagerfolder {background-image: url(../../resources/icon/manager/basedatamanagerfolder.png) !important;}
+.icon-manager-contact_blue {background-image: url(../../resources/icon/manager/contact_blue.png) !important;}
+.icon-manager-contact_grey {background-image: url(../../resources/icon/manager/contact_grey.png) !important;}
+.icon-manager-databasesexchangefolder {background-image: url(../../resources/icon/manager/databasesexchangefolder.png) !important;}
+.icon-manager-databasesfolder {background-image: url(../../resources/icon/manager/databasesfolder.png) !important;}
+.icon-manager-dictionarydatamanager {background-image: url(../../resources/icon/manager/dictionarydatamanager.gif) !important;}
+.icon-manager-dictionaryfolder {background-image: url(../../resources/icon/manager/dictionaryfolder.gif) !important;}
+.icon-manager-dictionarymanager {background-image: url(../../resources/icon/manager/dictionarymanager.gif) !important;}
+.icon-manager-esbflow {background-image: url(../../resources/icon/manager/esbflow.png) !important;}
+.icon-manager-esbflowinstance {background-image: url(../../resources/icon/manager/esbflowinstance.png) !important;}
+.icon-manager-esbmessage {background-image: url(../../resources/icon/manager/esbmessage.png) !important;}
+.icon-manager-group {background-image: url(../../resources/icon/manager/group.png) !important;}
+.icon-manager-group_blue {background-image: url(../../resources/icon/manager/group_blue.png) !important;}
+.icon-manager-group_green {background-image: url(../../resources/icon/manager/group_green.png) !important;}
+.icon-manager-menufolder {background-image: url(../../resources/icon/manager/menufolder.gif) !important;}
+.icon-manager-nocompanyuser {background-image: url(../../resources/icon/manager/nocompanyuser.png) !important;}
+.icon-manager-organizationfolder {background-image: url(../../resources/icon/manager/organizationfolder.png) !important;}
+.icon-manager-organizationmanager {background-image: url(../../resources/icon/manager/organizationmanager.png) !important;}
+.icon-manager-organizationusermanager {background-image: url(../../resources/icon/manager/organizationusermanager.png) !important;}
+.icon-manager-rolemanager {background-image: url(../../resources/icon/manager/rolemanager.png) !important;}
+.icon-manager-roleusermanager {background-image: url(../../resources/icon/manager/roleusermanager.png) !important;}
+.icon-manager-root {background-image: url(../../resources/icon/manager/root.png) !important;}
+.icon-manager-serviceplatformconfigfolder {background-image: url(../../resources/icon/manager/serviceplatformconfigfolder.png) !important;}
+.icon-manager-serviceplatformmanagerfolder {background-image: url(../../resources/icon/manager/serviceplatformmanagerfolder.png) !important;}
+.icon-manager-spcachemanager {background-image: url(../../resources/icon/manager/spcachemanager.png) !important;}
+.icon-manager-splogmanager {background-image: url(../../resources/icon/manager/splogmanager.png) !important;}
+.icon-manager-spscheduletask {background-image: url(../../resources/icon/manager/spscheduletask.png) !important;}
+.icon-manager-usermanager {background-image: url(../../resources/icon/manager/usermanager.png) !important;}
+.icon-sys-about {background-image: url(../../resources/icon/sys/about.png) !important;}
+.icon-sys-accept {background-image: url(../../resources/icon/sys/accept.png) !important;}
+.icon-sys-add {background-image: url(../../resources/icon/sys/add.png) !important;}
+.icon-sys-apply {background-image: url(../../resources/icon/sys/apply.png) !important;}
+.icon-sys-book {background-image: url(../../resources/icon/sys/book.png) !important;}
+.icon-sys-build {background-image: url(../../resources/icon/sys/build.png) !important;}
+.icon-sys-close {background-image: url(../../resources/icon/sys/close.png) !important;}
+.icon-sys-closeall {background-image: url(../../resources/icon/sys/closeall.png) !important;}
+.icon-sys-copy {background-image: url(../../resources/icon/sys/copy.png) !important;}
+.icon-sys-delete {background-image: url(../../resources/icon/sys/delete.png) !important;}
+.icon-sys-desktop {background-image: url(../../resources/icon/sys/desktop.png) !important;}
+.icon-sys-exit {background-image: url(../../resources/icon/sys/exit.png) !important;}
+.icon-sys-extjslogo {background-image: url(../../resources/icon/sys/extjslogo.png) !important;}
+.icon-sys-group {background-image: url(../../resources/icon/sys/group.png) !important;}
+.icon-sys-movedown {background-image: url(../../resources/icon/sys/movedown.png) !important;}
+.icon-sys-moveup {background-image: url(../../resources/icon/sys/moveup.png) !important;}
+.icon-sys-nocompanyuser {background-image: url(../../resources/icon/sys/nocompanyuser.png) !important;}
+.icon-sys-open {background-image: url(../../resources/icon/sys/open.png) !important;}
+.icon-sys-organization {background-image: url(../../resources/icon/sys/organization.png) !important;}
+.icon-sys-password {background-image: url(../../resources/icon/sys/password.png) !important;}
+.icon-sys-paste {background-image: url(../../resources/icon/sys/paste.png) !important;}
+.icon-sys-preferences {background-image: url(../../resources/icon/sys/preferences.png) !important;}
+.icon-sys-profile {background-image: url(../../resources/icon/sys/profile.png) !important;}
+.icon-sys-refresh {background-image: url(../../resources/icon/sys/refresh.png) !important;}
+.icon-sys-rename {background-image: url(../../resources/icon/sys/rename.png) !important;}
+.icon-sys-role {background-image: url(../../resources/icon/sys/role.png) !important;}
+.icon-sys-save {background-image: url(../../resources/icon/sys/save.png) !important;}
+.icon-sys-setting {background-image: url(../../resources/icon/sys/setting.png) !important;}
+.icon-sys-shortcut {background-image: url(../../resources/icon/sys/shortcut.png) !important;}
+.icon-sys-user {background-image: url(../../resources/icon/sys/user.png) !important;}
+.icon-sys-window {background-image: url(../../resources/icon/sys/window.png) !important;}
+
