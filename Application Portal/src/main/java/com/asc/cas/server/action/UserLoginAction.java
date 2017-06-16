@@ -105,7 +105,7 @@ public class UserLoginAction {
 			}
 			// TODO: 判断是否提交ticket？
 			String loginName = request.getParameter("u");
-			String passwd = request.getParameter("p");//PasswordUtil.decodeString(request.getParameter("p"));
+			String passwd = PasswordUtil.decodeString(request.getParameter("p"));
 			String validCode = request.getParameter("v");
 			String sysrandom = (String) request.getSession(true).getAttribute("randomString");//图形验证码
 			// 先判断验证码是否正确
