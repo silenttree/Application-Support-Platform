@@ -97,14 +97,14 @@ Ext.onReady(function(){
 	<tr>
 		<td width=80 align=center><image src="resources/images/logo-asc.png"/></td>
 		<td>
-			首创金融服务管理平台，架构于ASC（Application Support Center）应用支撑中心。
+			
 		</td>
 	</tr>
 	<tr>
 		<td colspan=2 align=center>
-			<span><a href="http://www.crmec.com.cn/" target="_blank">东华软件股份公司 版权所有</a></span>
+			<span><a href="http://www.crmec.com.cn/" target="_blank"></a></span>
 			<br>
-			<span>CRM E-commerce tech.Co.Ltd All Rights Reserved.</span>
+			<span></span>
 		</td>
 	</tr>
 </table> 
