@@ -93,7 +93,7 @@
 	</tr>
 	<tr>
 		<td colspan=2 align=center>
-			<span><a href="http://www.crmec.com.cn/" target="_blank">中铁物总电子商务技术有限公司 版权所有</a></span>
+			<span><a href="" target="_blank"></a></span>
 			<br>
 			<span></span>
 		</td>
