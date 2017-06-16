@@ -59,16 +59,35 @@ Ext.define('Asc.framework.page.view.Layout', {
 			items : itemCmps
 		};
 		config = Ext.apply(config, pageData.cfg);
+		// 帮助文档的tool
+		if(pageData.helpDocKey && pageData.helpDocKey.trim() !== "") {
+			if(!config.tools) {
+				config.tools = [];
+			}
+			config.tools.push({
+				type: 'help',
+				handler: function() {
+					AscApp.getAscDesktop().openDocWin(pageData.helpDocKey.trim());
+				}
+			});
+		}
         me.callParent([config]);
 	},
 	// 执行刷新
 	doRefresh : function(params){
-		for(var n in this.items){
+		// zhsq 2016-02-17 修改遍历items的方式
+		this.items.each(function(item, idx, len){
+			if(Ext.isFunction(item.doRefresh)){
+				item.doRefresh(params);
+				return true;
+			}
+		});
+		/*for(var n in this.items){
 			var item = this.items[n];
 			if(Ext.isFunction(item.doRefresh)){
 				item.doRefresh(params);
 			}
-		}
+		}*/
 	},
 	initComponent : function(){
 		var me = this;

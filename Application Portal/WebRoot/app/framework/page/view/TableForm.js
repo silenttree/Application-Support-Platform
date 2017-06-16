@@ -19,8 +19,8 @@ Ext.define('Asc.framework.page.view.TableForm', {
 	pageId : undefined,
 	// 页面参数
 	initParams : undefined,
-	// 设置装载后重置原始数据
-	//trackResetOnLoad : true,
+	
+	waitMsgTarget : Ext.getBody(),
 	// 重载构造函数
 	constructor : function(appKey, moduleId, pageData, params, context, cfg){
 		var me = this;
@@ -81,6 +81,8 @@ Ext.define('Asc.framework.page.view.TableForm', {
 				Ext.apply(inputs[n], {
 					layout : 'form',
 					anchor : '100%',
+					width : '100%',
+					padding : 1,
 					items : item || {}
 				});
 			}
@@ -91,8 +93,10 @@ Ext.define('Asc.framework.page.view.TableForm', {
 			layout : {
 				type : 'table',
 				columns : pageData.cols,
-				tableAttr : {
-					width : '100%'
+				tableAttrs : {
+		            style: {
+		                width: '100%'
+		            }
 				},
 				tdAttr : {
 					width : (100 / pageData.cols) + '%'
@@ -104,8 +108,10 @@ Ext.define('Asc.framework.page.view.TableForm', {
 			border : false,
 			defaults : {
 				border : false,
+				anchor : '100%',
 				width : '100%',
-				defaults : {
+				labelStyle : {
+					padding : '0 0 0 5',
 					labelWidth : pageData.labelWidth || 80
 				}
 			},
@@ -127,7 +133,18 @@ Ext.define('Asc.framework.page.view.TableForm', {
 		config.paramOrder = ['pageId', 'id', 'prefix', 'iniValues'];
 		Ext.apply(config, pageData.cfg);
 		Ext.apply(config, cfg);
-		console.log(config);
+		// 帮助文档的tool
+		if(pageData.helpDocKey && pageData.helpDocKey.trim() !== "") {
+			if(!config.tools) {
+				config.tools = [];
+			}
+			config.tools.push({
+				type: 'help',
+				handler: function() {
+					AscApp.getAscDesktop().openDocWin(pageData.helpDocKey.trim());
+				}
+			});
+		}
         me.callParent([config]);
 	},
 	// 执行刷新
@@ -135,9 +152,17 @@ Ext.define('Asc.framework.page.view.TableForm', {
 		if(params && params.iniValues){
 			Ext.apply(params.iniValues, this.baseParams.iniValues);
 		}
+		var waitMsgTarget = this.waitMsgTarget;
+		waitMsgTarget.mask('正在装载数据，请稍候...');
 		// 刷新设置持久参数
 		this.getForm().load({
-			params : params
+			params : params,
+			success : function(){
+				Ext.defer(waitMsgTarget.unmask, 50, waitMsgTarget);
+			},
+			failure : function(){
+				Ext.defer(waitMsgTarget.unmask, 50, waitMsgTarget);
+			}
 		});
 	}
 });

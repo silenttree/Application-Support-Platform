@@ -42,6 +42,18 @@ Ext.define('Asc.framework.page.view.Tree', {
 			title : pageData.title
 		}
 		var config = Ext.apply(config, pageData.cfg);
+		// 帮助文档的tool
+		if(pageData.helpDocKey && pageData.helpDocKey.trim() !== "") {
+			if(!config.tools) {
+				config.tools = [];
+			}
+			config.tools.push({
+				type: 'help',
+				handler: function() {
+					AscApp.getAscDesktop().openDocWin(pageData.helpDocKey.trim());
+				}
+			});
+		}
         me.callParent([config]);
 	},
 	onDestroy : function(){

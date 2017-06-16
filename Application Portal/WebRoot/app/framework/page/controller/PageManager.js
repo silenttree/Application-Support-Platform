@@ -113,6 +113,7 @@ Ext.define('Asc.framework.page.controller.PageManager', {
 						fn.call(scope || this);
 					}
 					Asc.common.Message.log('装载页面[' + appKey + '.' + pageId + ']数据执行完毕！');
+					console.log(result.data);
 				}else{
 					Asc.common.Message.showError('装载页面[' + appKey + '.' + pageId + ']失败！');
 				}
@@ -188,7 +189,7 @@ Ext.define('Asc.framework.page.controller.PageManager', {
 	// 装载URL页面
 	getUrlPage : function(appKey, moduleId, pageId, params, context){
 		var pageData = this.getPageData(appKey, moduleId, pageId);
-		var page = Ext.create('Asc.extension.JspPanel', Ext.apply({
+		var config = Ext.apply({
 			title : pageData.title,
 			iconCls : pageData.iconCls,
 			appId : appKey,
@@ -199,7 +200,20 @@ Ext.define('Asc.framework.page.controller.PageManager', {
 			params : Ext.apply({}, params, pageData.params),
 			itemId : appKey + '.' + pageId,
 			context : context
-		}, pageData.cfg));
+		}, pageData.cfg);
+		// 帮助文档的tool
+		if(pageData.helpDocKey && pageData.helpDocKey.trim() !== "") {
+			if(!config.tools) {
+				config.tools = [];
+			}
+			config.tools.push({
+				type: 'help',
+				handler: function() {
+					AscApp.getAscDesktop().openDocWin(pageData.helpDocKey.trim());
+				}
+			});
+		}
+		var page = Ext.create('Asc.extension.JspPanel', config);
 		return page;
 	},
 	getViewPage : function(appKey, moduleId, pageId, params, context){

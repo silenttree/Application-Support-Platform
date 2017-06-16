@@ -7,10 +7,8 @@ Ext.define('Asc.framework.page.view.View', {
 	requires : ['Asc.extension.PagingToolbar',
 	            'Asc.framework.page.view.QueryPlugin'],
     
-	autoScroll : true,
-	
 	isAutoLoad : true,
-	
+
 	border : false,
 	// 应用标识
 	appKey : undefined,
@@ -62,6 +60,18 @@ Ext.define('Asc.framework.page.view.View', {
 			},
 			fields : pageData.fields
 		});
+		// 处理序号列的宽度
+		me.store.on('load', function(s, records, successful, eOpts){
+			var noCol = me.getView().getGridColumns().every(function(item) {
+				if('rownumberer' == item.xtype){
+					var maxNo = (s.currentPage - 1) * s.pageSize + records.length;
+					var noWidth = (Math.floor(Math.log(maxNo) / Math.log(10) + 0.0001) + 1) * 8 + 7;
+					item.setWidth(noWidth);
+					return false;
+				}
+				return true;
+			});
+		});
 		// 初始化columns
 		config.columns = this.prepareColumns(pageData.columns);
 		// 初始化selmodel
@@ -106,11 +116,22 @@ Ext.define('Asc.framework.page.view.View', {
 		        displayInfo: true
 		    }];
 		}
-		
+
 		Ext.apply(config, pageData.cfg);
 		Ext.apply(config, cfg);
+		// 帮助文档的tool
+		if(pageData.helpDocKey && pageData.helpDocKey.trim() !== "") {
+			if(!config.tools) {
+				config.tools = [];
+			}
+			config.tools.push({
+				type: 'help',
+				handler: function() {
+					AscApp.getAscDesktop().openDocWin(pageData.helpDocKey.trim());
+				}
+			});
+		}
         me.callParent([config]);
-        
 	},
 	// 处理列对象
 	prepareColumns : function(cols){

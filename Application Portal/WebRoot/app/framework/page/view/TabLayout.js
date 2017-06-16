@@ -37,7 +37,6 @@ Ext.define('Asc.framework.page.view.TabLayout', {
 				itemId : item.id}, 
 			item.layoutConfig));
 			itemCmps.push(itemPage);
-			console.log(itemPage);
 		}
 		// 页面配置
 		var config = {
@@ -46,12 +45,24 @@ Ext.define('Asc.framework.page.view.TabLayout', {
 			items : itemCmps
 		};
 		config = Ext.apply(config, pageData.cfg);
-		
+		// 帮助文档的tool
+		if(pageData.helpDocKey && pageData.helpDocKey.trim() !== "") {
+			if(!config.tools) {
+				config.tools = [];
+			}
+			config.tools.push({
+				type: 'help',
+				handler: function() {
+					AscApp.getAscDesktop().openDocWin(pageData.helpDocKey.trim());
+				}
+			});
+		}
         me.callParent([config]);
 	},
 	// 执行刷新
 	doRefresh : function(params){
-		for(var item in this.items){
+		for(var i=0;i<this.items.getCount();i++){
+			var item = this.items.get(i);
 			if(Ext.isFunction(item.doRefresh)){
 				item.doRefresh(params);
 			}
